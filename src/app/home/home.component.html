@@ -1,0 +1,24 @@
+<div class="container" style="padding: 0px;">
+
+  <div class="row">
+    <div class="col-sm">
+
+      <app-busca> </app-busca>
+
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm">
+     
+      <div *ngFor="let aeroporto of voos">
+        {{aeroporto.PlaceName}}
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
