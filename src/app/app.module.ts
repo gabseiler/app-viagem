@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Ng2CompleterModule } from 'ng2-completer';
+import { FormsModule } from '@angular/forms';
+
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -18,8 +21,10 @@ import { HomeComponent } from './home/home.component';
       HomeComponent
    ],
    imports: [
-      BrowserModule, 
-      HttpClientModule
+      BrowserModule,
+      HttpClientModule,
+      Ng2CompleterModule,
+      FormsModule
    ],
    providers: [],
    bootstrap: [

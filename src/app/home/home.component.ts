@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit {
     this.pegarvoos();
   }
 
-  pegarvoos() {
-    this.vooservice.getAirport('Rio de Janeiro').subscribe(dados => {
+  async pegarvoos() {
+    await this.vooservice.getAirport('Rio de Janeiro').subscribe(dados => {
       this.voos = dados['Places'];
       console.log(this.voos);
     });
