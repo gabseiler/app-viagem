@@ -1,7 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Ng2CompleterModule } from 'ng2-completer';
 import { FormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import {CalendarModule} from 'primeng/calendar';
+import {ButtonModule} from 'primeng/button';
+import {DataViewModule} from 'primeng/dataview';
 
 
 import { HttpClientModule } from '@angular/common/http';
@@ -22,9 +26,13 @@ import { HomeComponent } from './home/home.component';
    ],
    imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       HttpClientModule,
-      Ng2CompleterModule,
-      FormsModule
+      FormsModule,
+      AutoCompleteModule,
+      CalendarModule,
+      ButtonModule,
+      DataViewModule
    ],
    providers: [],
    bootstrap: [

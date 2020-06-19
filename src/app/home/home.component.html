@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm">
 
-      <app-busca [recebeVoos2]="voos"> </app-busca>
+      <app-busca (respostaVoos)='buscarVoos($event)'> </app-busca>
 
     </div>
   </div>
@@ -12,12 +12,11 @@
 
     <div class="col-sm">
      
-      <div *ngFor="let aeroporto of voos">
-        {{aeroporto.PlaceName}}
-      </div>
 
     </div>
 
   </div>
+
+
 
 </div>

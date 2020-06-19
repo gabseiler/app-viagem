@@ -1,33 +1,50 @@
-<form>
+<form #buscaForm="ngForm" (ngSubmit)="buscar()">
   <div class="form-row busca">
     <div class="col-3">
-      <small>Origem</small>
-      <ng2-completer [inputClass]="'form-control'" [(ngModel)]="model.ida" 
-            [datasource]="dataService" [minSearchLength]="0"  placeholder="De onde vai sair?"
-            (selected)="onItemSelect($event, true)" name="ida" (keyup)="buscarAero($event, true)"></ng2-completer>
+      <h6>Origem</h6>
+      <p-autoComplete [(ngModel)]="model.origem" [suggestions]="recebeVoos" name="origem"
+      (completeMethod)="buscarAero($event)" placeholder="De onde vai sair?"
+      [size]="30" (onSelect)="onSelected($event, true)">
+        <ng-template let-origem pTemplate="item">
+          <div>{{origem.PlaceName }} - ({{origem.PlaceId}})</div>
+        </ng-template>
+      </p-autoComplete>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="checkIda" 
+        [checked]="somenteIda"
+        (change)="somenteIda = !somenteIda">
+        <label class="form-check-label" for="checkIda">
+          Somente Ida
+        </label>
+      </div>
     </div>
 
     <div class="col-3">
-      <small>Destino</small>
-      <ng2-completer [inputClass]="'form-control'" [(ngModel)]="model.volta" 
-      [datasource]="dataService" [minSearchLength]="0"  placeholder="Pra onde vai?"
-      name="volta" (selected)="onItemSelect($event, false)" (keyup)="buscarAero($event, false)"></ng2-completer>
+      <h6>Destino</h6>
+      <p-autoComplete [(ngModel)]="model.destino" [suggestions]="recebeVoos" name="destino"
+      (completeMethod)="buscarAero($event)" placeholder="Pra onde vai?"
+      [size]="30"  (onSelect)="onSelected($event, false)" >
+        <ng-template let-origem pTemplate="item">
+          <div>{{origem.PlaceName }} - ({{origem.PlaceId}})</div>
+        </ng-template>
+      </p-autoComplete>
     </div>
 
     <div class="col-2">
-      <small>Data Ida</small>                  
-       <input type="date" class="form-control">
-      
+      <h6>Data Ida</h6>                  
+      <p-calendar [(ngModel)]="model.dataIda" name="dataIda" placeholder="Quando vai?"
+      showIcon="true" [style]="{'width':'80%'}" [inputStyle]="{'width':'79%'}" dateFormat="dd/mm/yy"></p-calendar>      
     </div>
 
-    <div class="col-2">
-      <small>Data Volta</small>                  
-      <input type="date" class="form-control "> 
+    <div class="col-2" *ngIf="!somenteIda">
+      <h6>Data Volta</h6>                  
+      <p-calendar [(ngModel)]="model.dataVolta" name="dataVolta" placeholder="Quando volta?"
+      [showIcon]="true" [style]="{'width':'80%'}" [inputStyle]="{'width':'79%'}" dateFormat="dd/mm/yy"></p-calendar>
     </div>
 
     <div class="col-2">
      <br> 
-      <button type="submit" class="btn btn-block btn-dark">Buscar</button>
+      <button pButton type="submit" label="Buscar" class="ui-button-info ui-button-raised ui-button-rounded"></button>
     </div>
   </div>
 </form>

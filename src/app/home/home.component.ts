@@ -18,8 +18,11 @@ export class HomeComponent implements OnInit {
   async pegarvoos() {
     await this.vooservice.getAirport('Rio de Janeiro').subscribe(dados => {
       this.voos = dados['Places'];
-      console.log(this.voos);
     });
-
   }
+
+  buscarVoos(voo: any) {
+    console.log(voo);
+  }
+
 }
