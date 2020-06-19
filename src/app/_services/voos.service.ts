@@ -15,12 +15,23 @@ const httpOptions = {
 
 export class VoosService {
 
-  baseUrl = 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/BR/BRL/pt-BR/';
+  baseUrlPlaces = 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/BR/BRL/pt-BR/';
+  baseUrlDates = 'https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/BR/BRL/pt-BR/';
   constructor(private http: HttpClient) { }
 
    getAirport(city: any) {
-    return this.http.get(this.baseUrl + '?query=' + city, httpOptions);
-  }
+    return this.http.get(this.baseUrlPlaces + '?query=' + city, httpOptions);
+   }
+
+   getVoo(origem: any, destino: any, dataIda: any, dataVolta: any) {
+     if (dataVolta === 'anytime') {
+        return this.http.get(this.baseUrlDates + origem + '/' + destino + '/'
+                         + dataIda + '?inboundPartialDate=' + dataVolta, httpOptions);
+     } else {
+        return this.http.get(this.baseUrlDates + origem + '/' + destino + '/'
+                         + dataIda + '/' + dataVolta, httpOptions);
+     }
+   }
 
 
 }

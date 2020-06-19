@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { BuscaComponent } from './busca/busca.component';
 import { HomeComponent } from './home/home.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -34,7 +35,7 @@ import { HomeComponent } from './home/home.component';
       ButtonModule,
       DataViewModule
    ],
-   providers: [],
+   providers: [DatePipe],
    bootstrap: [
       AppComponent
    ]

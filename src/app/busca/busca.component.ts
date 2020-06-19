@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { VoosService } from '../_services/voos.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-busca',
@@ -17,7 +18,7 @@ export class BuscaComponent implements OnInit {
   dataIdaAux: any;
   dataVoltaAux: any;
 
-  constructor(private vooservice: VoosService) {
+  constructor(private vooservice: VoosService, public datepipe: DatePipe) {
    }
 
   ngOnInit() {
@@ -48,14 +49,13 @@ export class BuscaComponent implements OnInit {
   buscar() {
     if (this.somenteIda) {
       this.dataVoltaAux = 'anytime';
-      this.auxDestino = '';
     } else {
       this.dataVoltaAux = new Date (Date.parse(this.model.dataVolta));
-      this.dataVoltaAux = this.dataVoltaAux.toLocaleDateString('en-US');
+      this.dataVoltaAux = this.datepipe.transform(this.dataVoltaAux, 'yyyy-MM-dd');
     }
 
     this.dataIdaAux = new Date (Date.parse(this.model.dataIda));
-    this.dataIdaAux = this.dataIdaAux.toLocaleDateString('en-US');
+    this.dataIdaAux = this.datepipe.transform(this.dataIdaAux, 'yyyy-MM-dd');
 
     this.respostaVoos.emit(
       {
@@ -65,6 +65,5 @@ export class BuscaComponent implements OnInit {
         dataVolta: this.dataVoltaAux
       }
     );
-    console.log(this.respostaVoos);
   }
 }

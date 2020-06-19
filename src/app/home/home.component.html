@@ -7,11 +7,27 @@
 
     </div>
   </div>
-
+  <br>
   <div class="row">
 
     <div class="col-sm">
-     
+          <div *ngFor="let voo of voos" style="width: 300px;">
+              ID: {{voo.id}}<br>
+              Preço: R${{voo.preco}},00<br>
+              Ida:<br>
+              - Companhia: {{voo.companhiaIda}}<br>
+              - Origem: {{voo.origemIda}}<br>
+              - Destino: {{voo.destinoIda}}<br>
+              - Data: {{voo.dataIda}}<br>
+            <div *ngIf="!somenteIda">
+              Volta:<br>
+              - Companhia: {{voo.companhiaVolta}}<br>
+              - Origem: {{voo.origemVolta}}<br>
+              - Destino: {{voo.destinoVolta}}<br>
+              - Data: {{voo.dataVolta}}<br>
+              <br>
+            </div>
+          </div>
 
     </div>
 
