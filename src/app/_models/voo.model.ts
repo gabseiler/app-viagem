@@ -4,11 +4,15 @@ export class Voo {
     direto?: string;
     companhiaIda?: string;
     origemIda?: string;
+    origemSiglaIda?: string;
     destinoIda?: string;
+    destinoSiglaIda?: string;
     dataIda?: string;
     companhiaVolta?: string;
     origemVolta?: string;
+    origemSiglaVolta?: string;
     destinoVolta?: string;
+    destinoSiglaVolta?: string;
     dataVolta?: string;
 }
 
@@ -21,4 +25,5 @@ export class Aeroporto {
     PlaceId?: string;
     Name?: string;
     CityName?: string;
+    IataCode?: string;
 }

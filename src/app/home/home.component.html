@@ -1,38 +1,82 @@
 <div class="container" style="padding: 0px;">
-
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm-12">
 
       <app-busca (respostaVoos)='buscarVoos($event)'> </app-busca>
 
     </div>
   </div>
   <br>
-  <div class="row">
-
-    <div class="col-sm">
-          <div *ngFor="let voo of voos" style="width: 300px;">
-              ID: {{voo.id}}<br>
-              Preço: R${{voo.preco}},00<br>
-              Ida:<br>
-              - Companhia: {{voo.companhiaIda}}<br>
-              - Origem: {{voo.origemIda}}<br>
-              - Destino: {{voo.destinoIda}}<br>
-              - Data: {{voo.dataIda}}<br>
-            <div *ngIf="!somenteIda">
-              Volta:<br>
-              - Companhia: {{voo.companhiaVolta}}<br>
-              - Origem: {{voo.origemVolta}}<br>
-              - Destino: {{voo.destinoVolta}}<br>
-              - Data: {{voo.dataVolta}}<br>
-              <br>
-            </div>
+  
+  <div class="row">    
+      <div *ngIf="!voos || voos.length == 0" class="col-md-12">
+        <div class="card text-center text-white bg-primary border-warning ">
+          <div class="card-header"><h5>Ops...</h5></div>
+          <div class="card-body ">
+            <h5 class="card-title">Não encontramos os vôos para as datas desejadas, 
+              por favor realize uma nova busca!</h5>
+            <p class="card-text">Estamos sempre buscando as melhores opções para você!</p>
           </div>
-
-    </div>
-
+        </div>
+      </div>
   </div>
-
+  <div *ngIf="somenteIda" class="row">
+    <div *ngFor="let voo of voos" class="col-md-4">
+      <div class="card border-info" style="height:400px;">
+          <h5 class="card-header">{{voo.destinoIda | slice:0:50}}</h5>
+          <div class="card-body">
+            <h6 class="card-title">De:</h6>
+            <h6 class="card-subtitle mb-2 text-muted"> {{voo.origemIda}} <br> {{voo.companhiaIda}}</h6>
+            <h6 class="card-title">{{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaIda}}</h6>
+            <p class="card-text">
+              Data: {{voo.dataIda}}
+            </p>
+              <h5>R$ {{voo.preco}},00 </h5>
+            <p class="card-text">
+              Parcelamos em até 10x sem juros!
+            </p>
+            <a href="#" class="btn btn-primary">Ver agora</a>
+          </div>
+      </div> <br>
+    </div>
+  </div>
+  <div *ngIf="!somenteIda" class="row">
+    <div *ngFor="let voo of voos" class="col-md-6">
+      <div class="card-group">
+        <div class="card border-info" style="height:350px;">
+            <h5 class="card-header">{{voo.destinoIda}}</h5>
+            <div class="card-body">
+              <h6 class="card-title">De:</h6>
+              <h6 class="card-subtitle mb-2 text-muted"> {{voo.origemIda}} <br> {{voo.companhiaIda}}</h6>
+              <h6 class="card-title">{{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaIda}}</h6>
+              <p class="card-text">
+                Data: {{voo.dataIda}}<br>
+              </p>
+                <h5>R$ {{voo.preco}},00 </h5>
+              <p class="card-text">
+                Parcelamos em até 10x sem juros!
+              </p>
+            </div>
+        </div>
+        <div class="card border-info" style="height:350px;">
+          <h5 class="card-header">{{voo.destinoVolta}}</h5>
+          <div class="card-body">
+            <h6 class="card-title">De:</h6>
+            <h6 class="card-subtitle mb-2 text-muted"> {{voo.origemVolta}} <br> {{voo.companhiaVolta}}</h6>
+            <h6 class="card-title">{{voo.origemSiglaVolta}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaVolta}}</h6>
+            <p class="card-text">
+              Data: {{voo.dataVolta}}<br>
+            </p>
+              <h5>R$ {{voo.preco}},00 </h5>
+            <p class="card-text">
+              Parcelamos em até 10x sem juros!
+            </p>
+            <a href="#" class="btn btn-primary">Ver agora</a>
+          </div>
+      </div>
+      </div> <br>
+    </div>
+  </div>
 
 
 </div>

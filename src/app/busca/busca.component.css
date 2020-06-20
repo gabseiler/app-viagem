@@ -1,8 +1,5 @@
  .busca {
 
-margin-left: -65px;
-margin-right: -65px;
-margin-top: 25px;
 margin-bottom: 25px;
 background-color: rgba(255, 196, 0, 0.986);
 padding: 10px;
@@ -12,3 +9,6 @@ padding: 10px;
     width: 150%; 
 }
 
+p-calendar span .ui-inputtext {
+    width: 50%;
+}

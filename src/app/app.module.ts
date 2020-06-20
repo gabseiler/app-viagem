@@ -15,6 +15,7 @@ import { MenuComponent } from './menu/menu.component';
 import { BuscaComponent } from './busca/busca.component';
 import { HomeComponent } from './home/home.component';
 import { DatePipe } from '@angular/common';
+import { RodapeComponent } from './rodape/rodape.component';
 
 
 
@@ -23,7 +24,8 @@ import { DatePipe } from '@angular/common';
       AppComponent,
       MenuComponent,
       BuscaComponent,
-      HomeComponent
+      HomeComponent,
+      RodapeComponent
    ],
    imports: [
       BrowserModule,

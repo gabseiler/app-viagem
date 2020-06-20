@@ -1,6 +1,6 @@
 <form #buscaForm="ngForm" (ngSubmit)="buscar()">
   <div class="form-row busca">
-    <div class="col-3">
+    <div class="col-md-3">
       <h6>Origem</h6>
       <p-autoComplete [(ngModel)]="model.origem" [suggestions]="recebeVoos" name="origem"
       (completeMethod)="buscarAero($event)" placeholder="De onde vai sair?"
@@ -19,7 +19,7 @@
       </div>
     </div>
 
-    <div class="col-3">
+    <div class="col-md-3">
       <h6>Destino</h6>
       <p-autoComplete [(ngModel)]="model.destino" [suggestions]="recebeVoos" name="destino"
       (completeMethod)="buscarAero($event)" placeholder="Pra onde vai?"
@@ -30,19 +30,19 @@
       </p-autoComplete>
     </div>
 
-    <div class="col-2">
+    <div class="col-md-2">
       <h6>Data Ida</h6>                  
       <p-calendar [(ngModel)]="model.dataIda" name="dataIda" placeholder="Quando vai?"
-      showIcon="true" [style]="{'width':'80%'}" [inputStyle]="{'width':'79%'}" dateFormat="dd/mm/yy"></p-calendar>      
+      showIcon="true" [style]="{'width':'80%'}" [inputStyle]="{'width':'75%'}" dateFormat="dd/mm/yy"></p-calendar>      
     </div>
 
-    <div class="col-2" *ngIf="!somenteIda">
+    <div class="col-md-2" *ngIf="!somenteIda">
       <h6>Data Volta</h6>                  
       <p-calendar [(ngModel)]="model.dataVolta" name="dataVolta" placeholder="Quando volta?"
-      [showIcon]="true" [style]="{'width':'80%'}" [inputStyle]="{'width':'79%'}" dateFormat="dd/mm/yy"></p-calendar>
+      [showIcon]="true" [style]="{'width':'80%'}" [inputStyle]="{'width':'75%'}" dateFormat="dd/mm/yy"></p-calendar>
     </div>
 
-    <div class="col-2">
+    <div class="col-md-1">
      <br> 
       <button pButton type="submit" label="Buscar" class="ui-button-info ui-button-raised ui-button-rounded"></button>
     </div>
