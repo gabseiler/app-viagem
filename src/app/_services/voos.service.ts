@@ -7,7 +7,7 @@ const httpOptions = {
     'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
     'x-rapidapi-key': environment.rapidapikey,
     'useQueryString': 'true',
-    'Access-Control-Allow-Origin': environment.cors
+    'Access-Control-Allow-Origin': '*'
   })
 };
 
