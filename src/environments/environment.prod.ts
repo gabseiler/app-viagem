@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  rapidapikey: 'cbaf304fd4msh7e813e51d470977p11f1d9jsnb31231c76a21'
+  rapidapikey: '0e3056d71amshd616de54b80603dp1c42c3jsna531b4e8b76c'
 };
