@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 const httpOptions = {
   headers: new HttpHeaders({
     'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
-    'x-rapidapi-key': 'da3a731818mshd19d692e5f213b3p198466jsn3484bede7fa5',
+    'x-rapidapi-key': '05d722c80bmshc442c272c1ce8b2p1c02bejsn27c28e9a6ea6',
     'useQueryString': 'true'
   })
 };
