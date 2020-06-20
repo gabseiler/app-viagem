@@ -6,7 +6,8 @@ const httpOptions = {
   headers: new HttpHeaders({
     'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
     'x-rapidapi-key': '05d722c80bmshc442c272c1ce8b2p1c02bejsn27c28e9a6ea6',
-    'useQueryString': 'true'
+    'useQueryString': 'true',
+    'Access-Control-Allow-Origin': '*'
   })
 };
 
