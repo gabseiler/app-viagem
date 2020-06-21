@@ -16,6 +16,8 @@ import { BuscaComponent } from './busca/busca.component';
 import { HomeComponent } from './home/home.component';
 import { DatePipe } from '@angular/common';
 import { RodapeComponent } from './rodape/rodape.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 
@@ -35,7 +37,9 @@ import { RodapeComponent } from './rodape/rodape.component';
       AutoCompleteModule,
       CalendarModule,
       ButtonModule,
-      DataViewModule
+      DataViewModule,
+      ModalModule.forRoot(),
+      BsDropdownModule.forRoot()
    ],
    providers: [DatePipe],
    bootstrap: [

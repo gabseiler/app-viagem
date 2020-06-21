@@ -35,7 +35,7 @@
             <p class="card-text">
               Parcelamos em até 10x sem juros!
             </p>
-            <a href="#" class="btn btn-primary">Ver agora</a>
+            <button type="button" class="btn btn-primary" (click)="openModal(template, voo)">Ver agora</button>
           </div>
       </div> <br>
     </div>
@@ -71,12 +71,36 @@
             <p class="card-text">
               Parcelamos em até 10x sem juros!
             </p>
-            <a href="#" class="btn btn-primary">Ver agora</a>
+            <button type="button" class="btn btn-primary" (click)="openModal(template, voo)">Ver agora</button>
           </div>
       </div>
       </div> <br>
     </div>
   </div>
 
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Garanta já sua viagem para {{vooSelecionado.destinoIda}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Partindo de: {{vooSelecionado.origemIda}}
+      <h6>{{vooSelecionado.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{vooSelecionado.destinoSiglaIda}}</h6>
+      <br>
+      Data e horário: {{vooSelecionado.dataIda}}
+
+      <h6 class="mb-2 text-muted"> Valor total </h6>
+      <h4>R$ {{vooSelecionado.preco}},00</h4>
+
+        <label for="example-number-input" class="col-2-sm col-form-label">Quantidade:</label>
+        <div class="col-3-sm">
+          <input class="form-control" min="1" max="15" [(ngModel)]="qtd" type="number" value="1" id="qtd" (click)="mudarPreco()">
+        </div>
+        <br>
+        <button type="button" class="btn btn-primary" (click)="openModal(template, voo)">Adicionar ao carrinho</button>
+    </div>
+  </ng-template>
 
 </div>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { VoosService } from '../_services/voos.service';
 import { Voo, Companhia, Aeroporto } from '../_models/voo.model';
 import { DatePipe } from '@angular/common';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-home',
@@ -15,8 +16,13 @@ export class HomeComponent implements OnInit {
   companhias: Companhia[];
   quotes: any[];
   somenteIda: boolean;
+  modalRef: BsModalRef;
 
-  constructor(private vooservice: VoosService, public datepipe: DatePipe) { }
+  vooSelecionado: Voo;
+  qtd = 1;
+  precoInicialVoo: string;
+
+  constructor(private vooservice: VoosService, public datepipe: DatePipe, private modalService: BsModalService) { }
 
   ngOnInit() {
     const voo = {
@@ -76,4 +82,13 @@ export class HomeComponent implements OnInit {
     console.log(this.voos);
   }
 
+  openModal(template: TemplateRef<any>, voo: Voo) {
+    this.vooSelecionado = voo;
+    this.precoInicialVoo = voo.preco;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  mudarPreco() {
+    this.vooSelecionado.preco = (Number(this.precoInicialVoo) * this.qtd) + '';
+  }
 }
