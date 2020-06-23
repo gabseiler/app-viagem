@@ -20,6 +20,10 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    // tslint:disable-next-line: forin
+    for (let a in localStorage) {
+      localStorage.removeItem(a);
+
+    }
   }
 }

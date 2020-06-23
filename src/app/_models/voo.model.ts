@@ -1,6 +1,7 @@
 export class Voo {
     id?: string;
-    preco?: string;
+    precoUnit?: string;
+    precoTotal?: string;
     direto?: string;
     companhiaIda?: string;
     origemIda?: string;

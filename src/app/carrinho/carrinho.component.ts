@@ -37,7 +37,9 @@ export class CarrinhoComponent implements OnInit {
    }
   }
 
-  mudarPreco() {
+  mudarPreco(i: number, qtd: number) {
+    this.voos[i].precoTotal = Number(this.voos[i].precoUnit) * qtd + '';
+    this.calcularTotal();
   }
   excluir(key: string) {
     localStorage.removeItem(key);
@@ -45,11 +47,13 @@ export class CarrinhoComponent implements OnInit {
   }
 
   calcularTotal() {
+    this.totalVoos = 0;
+    this.totalHoteis = 0;
     if (this.voos.length === 0) {
       this.totalVoos = 0;
     } else {
       for (const voo of this.voos) {
-        this.totalVoos += Number(voo.preco);
+        this.totalVoos += Number(voo.precoTotal);
       }
     }
 

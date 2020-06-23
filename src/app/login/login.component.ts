@@ -18,4 +18,8 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/carrinho']);
   }
 
+  cancel() {
+    this.router.navigate(['/carrinho']);
+  }
+
 }

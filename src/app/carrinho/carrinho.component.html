@@ -14,10 +14,10 @@
                   <p class="card-text">
                     Data e horário: {{voo.dataIda}}
                   </p>
-                  <p class="card-text">R$ {{voo.preco}},00</p>
+                  <p class="card-text">R$ {{voo.precoTotal}},00</p>
                   <label for="example-number-input" class="col-2-sm col-form-label">Quantidade:</label>
                   <div class="col-3-sm">
-                    <input class="form-control" min="1" max="15" [(ngModel)]="voos[i].qtd" type="number" [value]="voo.qtd" id="qtd" (click)="mudarPreco(voo.qtd)">
+                    <input class="form-control" min="1" max="15" [(ngModel)]="voos[i].qtd" type="number" [value]="voo.qtd" id="qtd" (click)="mudarPreco(i,voo.qtd)">
                   </div>
                   <br>
                   <button  class="btn btn-primary" (click)="excluir(this.voo.storageKey)"> <span class="pi pi-trash"  style="font-size: 1em"></span> Remover</button>
