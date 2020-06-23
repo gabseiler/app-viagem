@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
+  loggedIn() {
+    // const token = localStorage.getItem('token');
+    // a exclamaçao dupla seta a variavel como boolean, retornando true se estiver preenchida e false caso contrario
+    // return !!token;
+    return this.authService.loggedIn();
+  }
 
+  logout() {
+    localStorage.removeItem('token');
+  }
 }

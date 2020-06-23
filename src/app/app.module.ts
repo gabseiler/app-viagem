@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {CalendarModule} from 'primeng/calendar';
 import {ButtonModule} from 'primeng/button';
@@ -18,6 +19,9 @@ import { DatePipe } from '@angular/common';
 import { RodapeComponent } from './rodape/rodape.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CarrinhoComponent } from './carrinho/carrinho.component';
+import { LoginComponent } from './login/login.component';
+import { HoteisComponent } from './hoteis/hoteis.component';
 
 
 
@@ -27,11 +31,15 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
       MenuComponent,
       BuscaComponent,
       HomeComponent,
-      RodapeComponent
+      RodapeComponent,
+      CarrinhoComponent,
+      LoginComponent,
+      HoteisComponent
    ],
    imports: [
       BrowserModule,
       BrowserAnimationsModule,
+      AppRoutingModule,
       HttpClientModule,
       FormsModule,
       AutoCompleteModule,
@@ -41,7 +49,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
       ModalModule.forRoot(),
       BsDropdownModule.forRoot()
    ],
-   providers: [DatePipe],
+   providers: [
+      DatePipe
+   ],
    bootstrap: [
       AppComponent
    ]

@@ -63,6 +63,8 @@ export class HomeComponent implements OnInit {
         this.voo.id = element.QuoteId;
         this.voo.preco = element.MinPrice;
         this.voo.direto = element.Direct;
+        this.voo.storageKey = 'item' + this.voo.id;
+        this.voo.qtd = 1;
         this.voo.companhiaIda = this.companhias.find(companhia => companhia.CarrierId === element.OutboundLeg.CarrierIds[0]).Name;
         this.voo.origemIda = this.aeroportos.find(aero => aero.PlaceId === element.OutboundLeg.OriginId).Name;
         this.voo.origemSiglaIda = this.aeroportos.find(aero => aero.PlaceId === element.OutboundLeg.OriginId).IataCode;
@@ -76,6 +78,7 @@ export class HomeComponent implements OnInit {
         this.voo.destinoVolta = this.aeroportos.find(aero => aero.PlaceId === element.InboundLeg.DestinationId).Name;
         this.voo.destinoSiglaVolta = this.aeroportos.find(aero => aero.PlaceId === element.InboundLeg.DestinationId).IataCode;
         this.voo.dataVolta = this.datepipe.transform(element.InboundLeg.DepartureDate, 'dd/MM/yyyy HH:mm');
+        this.voo.preco = Number(this.voo.preco) * 2 + '';
         }
         this.voos.push(this.voo);
     });
@@ -88,7 +91,12 @@ export class HomeComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
+  addCarrinho() {
+    localStorage.setItem('item' + this.vooSelecionado.id, JSON.stringify(this.vooSelecionado));
+    this.modalRef.hide();
+  }
   mudarPreco() {
+    this.vooSelecionado.qtd = this.qtd;
     this.vooSelecionado.preco = (Number(this.precoInicialVoo) * this.qtd) + '';
   }
 }

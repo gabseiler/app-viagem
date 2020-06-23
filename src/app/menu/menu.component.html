@@ -1,26 +1,40 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-  <a class="navbar-brand" href="#">GoFar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"> Promoções </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Minhas Reservas
+  <div class="container-fluid">
+    <!-- lado esquerdo -->
+    <a class="navbar-brand" href="#">GoFar</a>
+    <button class="navbar-toggler" type="button"  data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Passagens Aéreas </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Hotéis</a>
+        </li>
+      </ul>
+
+
+    <!-- lado direito -->
+
+      <div *ngIf="loggedIn()" class="nav-item">
+        <a class="nav-link text-dark" [routerLink]="['/carrinho']"><span class="pi pi-shopping-cart" style="font-size: 1em"></span> Carrinho</a>
+      </div>
+      <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="dropdown-toggle text-dark" dropdownToggle >
+          Bem-vindo 
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Editar perfil</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item " (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
         </div>
-      </li>
-    </ul>
+      </div>  
+      <div *ngIf="!loggedIn()" class="nav-item">
+        <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>
+      </div>
+    </div>
   </div>
 </nav>

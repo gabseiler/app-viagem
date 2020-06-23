@@ -1,13 +1,25 @@
+
+<div class="container" style="padding: 0px;">
+  <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+      <h1 class="display-4">Encontre seu passeio ideal aqui</h1>
+      <p class="lead">Confira as promoções incríveis que temos para pacotes com tudo incluso!</p>
+      </div>
+  </div>
+</div>
+
 <div class="container" style="padding: 0px;">
   <div class="row">
     <div class="col-sm-12">
 
+    <!-- componente de busca -->
       <app-busca (respostaVoos)='buscarVoos($event)'> </app-busca>
 
     </div>
   </div>
   <br>
   
+  <!-- Mensagem de erro para quando nao for encontrado Voo -->
   <div class="row">    
       <div *ngIf="!voos || voos.length == 0" class="col-md-12">
         <div class="card text-center text-white bg-primary border-warning ">
@@ -20,6 +32,8 @@
         </div>
       </div>
   </div>
+  
+  <!-- Lista de Voos para somente Ida -->
   <div *ngIf="somenteIda" class="row">
     <div *ngFor="let voo of voos" class="col-md-4">
       <div class="card border-info" style="height:400px;">
@@ -40,6 +54,9 @@
       </div> <br>
     </div>
   </div>
+
+
+  <!-- Lista de Voos para Ida e Volta -->
   <div *ngIf="!somenteIda" class="row">
     <div *ngFor="let voo of voos" class="col-md-6">
       <div class="card-group">
@@ -51,10 +68,6 @@
               <h6 class="card-title">{{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaIda}}</h6>
               <p class="card-text">
                 Data: {{voo.dataIda}}<br>
-              </p>
-                <h5>R$ {{voo.preco}},00 </h5>
-              <p class="card-text">
-                Parcelamos em até 10x sem juros!
               </p>
             </div>
         </div>
@@ -78,6 +91,8 @@
     </div>
   </div>
 
+
+  <!-- Modal suspenso com o Voo selecionado -->
   <ng-template #template>
     <div class="modal-header">
       <h4 class="modal-title pull-left">Garanta já sua viagem para {{vooSelecionado.destinoIda}}</h4>
@@ -88,9 +103,14 @@
     <div class="modal-body">
       Partindo de: {{vooSelecionado.origemIda}}
       <h6>{{vooSelecionado.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{vooSelecionado.destinoSiglaIda}}</h6>
-      <br>
       Data e horário: {{vooSelecionado.dataIda}}
-
+      <br><br>
+      <div *ngIf="!somenteIda">
+        Voltando de: {{vooSelecionado.origemVolta}}
+        <h6>{{vooSelecionado.origemSiglaVolta}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{vooSelecionado.destinoSiglaVolta}}</h6>
+        Data e horário: {{vooSelecionado.dataVolta}}
+      </div>
+      <br><br>
       <h6 class="mb-2 text-muted"> Valor total </h6>
       <h4>R$ {{vooSelecionado.preco}},00</h4>
 
@@ -99,7 +119,7 @@
           <input class="form-control" min="1" max="15" [(ngModel)]="qtd" type="number" value="1" id="qtd" (click)="mudarPreco()">
         </div>
         <br>
-        <button type="button" class="btn btn-primary" (click)="openModal(template, voo)">Adicionar ao carrinho</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/carrinho']" (click)="addCarrinho()">Adicionar ao carrinho</button>
     </div>
   </ng-template>
 

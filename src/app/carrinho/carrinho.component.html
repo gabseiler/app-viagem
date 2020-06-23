@@ -1,0 +1,34 @@
+<div class="container" style="padding: 0px;">
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Seu carrinho:</h1>
+            <br>
+            <div class="card" *ngFor="let voo of voos;let i = index;">
+                <div class="card-body">
+                  <h5 class="card-title">Passagem: {{voo.destinoIda}}</h5>
+                  <p class="card-text">
+                    Partindo de: {{voo.origemIda}}</p>
+                  <h6>{{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaIda}}</h6>
+                  <br>
+                  <p class="card-text">
+                    Data e horário: {{voo.dataIda}}
+                  </p>
+                  <p class="card-text">R$ {{voo.preco}},00</p>
+                  <label for="example-number-input" class="col-2-sm col-form-label">Quantidade:</label>
+                  <div class="col-3-sm">
+                    <input class="form-control" min="1" max="15" [(ngModel)]="voos[i].qtd" type="number" [value]="voo.qtd" id="qtd" (click)="mudarPreco(voo.qtd)">
+                  </div>
+                  <br>
+                  <button  class="btn btn-primary" (click)="excluir(this.voo.storageKey)"> <span class="pi pi-trash"  style="font-size: 1em"></span> Remover</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class=" float-right">
+      <h6>Total: R$ {{total}},00</h6>
+    </div>
+    <br>
+    <button type="button" class="btn btn-primary float-right">Finalizar compra</button>
+</div>

@@ -14,6 +14,10 @@ export class Voo {
     destinoVolta?: string;
     destinoSiglaVolta?: string;
     dataVolta?: string;
+    qtd?: number;
+    // 1 = voo, 2 = hotel
+    tipo = 1;
+    storageKey?: string;
 }
 
 export class Companhia {
