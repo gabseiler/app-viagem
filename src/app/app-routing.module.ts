@@ -11,12 +11,13 @@ export const routes: Routes = [
     { path: 'voos', component: HomeComponent},
     { path: 'hoteis', component: HoteisComponent},
     { path: 'login', component: LoginComponent},
+    { path: 'carrinho', component: CarrinhoComponent},
     {
         path: '',
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'carrinho', component: CarrinhoComponent},
+            { path: 'car', component: CarrinhoComponent},
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

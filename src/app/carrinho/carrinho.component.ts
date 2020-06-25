@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Voo } from '../_models/voo.model';
+import { Hotel } from '../_models/hotel.model';
 
 @Component({
   selector: 'app-carrinho',
@@ -10,7 +11,7 @@ export class CarrinhoComponent implements OnInit {
 
 
   voos: Voo[];
-  hoteis: any[];
+  hoteis: Hotel[];
   qtd = 1;
   totalVoos = 0;
   totalHoteis = 0;
@@ -25,6 +26,7 @@ export class CarrinhoComponent implements OnInit {
 
   getAllItems() {
     this.voos = new Array();
+    this.hoteis = new Array();
     // tslint:disable-next-line: forin
     for (let a in localStorage) {
       if (a.includes('item')) {
@@ -32,9 +34,13 @@ export class CarrinhoComponent implements OnInit {
         console.log(i);
         if (i != null && i['tipo'] === 1) {
           this.voos.push(i);
+        } else if (i != null && i['tipo'] === 2) {
+          console.log('oi');
+          this.hoteis.push(i);
         }
       }
    }
+   console.log(this.hoteis);
   }
 
   mudarPreco(i: number, qtd: number) {
@@ -49,11 +55,20 @@ export class CarrinhoComponent implements OnInit {
   calcularTotal() {
     this.totalVoos = 0;
     this.totalHoteis = 0;
+
     if (this.voos.length === 0) {
       this.totalVoos = 0;
-    } else {
+    } else if (this.voos.length !== 0) {
       for (const voo of this.voos) {
         this.totalVoos += Number(voo.precoTotal);
+      }
+    }
+
+    if (this.hoteis.length === 0) {
+      this.totalHoteis = 0;
+    } else if (this.hoteis.length !== 0) {
+      for (const hot of this.hoteis) {
+        this.totalHoteis += Number(hot.preco);
       }
     }
 

@@ -23,6 +23,21 @@
                   <button  class="btn btn-primary" (click)="excluir(this.voo.storageKey)"> <span class="pi pi-trash"  style="font-size: 1em"></span> Remover</button>
                 </div>
             </div>
+
+            <div class="card" *ngFor="let hot of hoteis;let i = index;">
+              <div class="card-body">
+                <h5 class="card-title">Hospedagem: {{hot.nome}}</h5>
+                <p class="card-text">
+                  Em: {{hot.local}}</p>
+                <br>
+                <p class="card-text">
+                  Data: {{hot.checkIn}}
+                </p>
+                <p class="card-text">R$ {{hot.preco}},00</p>
+                <br>
+                <button  class="btn btn-primary" (click)="excluir(this.hot.storageKey)"> <span class="pi pi-trash"  style="font-size: 1em"></span> Remover</button>
+              </div>
+          </div>
         </div>
     </div>
     <br>

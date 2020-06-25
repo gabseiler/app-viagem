@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { HoteisService } from '../_services/hoteis.service';
 import { Local, Hotel } from '../_models/hotel.model';
 import { element } from 'protractor';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-hoteis',
@@ -16,8 +18,10 @@ export class HoteisComponent implements OnInit {
   aux: any[];
 
   model: any;
+  modalRef: BsModalRef;
+  hotelSelecionado: Hotel;
 
-  constructor(private hotelService: HoteisService) { }
+  constructor(private hotelService: HoteisService, public datepipe: DatePipe, private modalService: BsModalService) { }
 
   ngOnInit() {
     const a = {
@@ -35,11 +39,11 @@ export class HoteisComponent implements OnInit {
     this.hotelService.getHoteis(hoteis.cidadeId, hoteis.dataCheckin, hoteis.adultos, hoteis.noites, hoteis.quartos).subscribe(data => {
       console.log(data['data']);
       this.aux  = data['data'];
-      this.montarHoteis();
+      this.montarHoteis(hoteis.cidadeId, hoteis.dataCheckin, hoteis.adultos, hoteis.noites, hoteis.quartos);
     });
   }
 
-  montarHoteis() {
+  montarHoteis(id: any, checkin: any, adults: any, nights: any, rooms: any) {
     this.hoteis = new Array();
 
     this.aux.forEach(element => {
@@ -50,10 +54,29 @@ export class HoteisComponent implements OnInit {
       this.hotel.nota = element.hotel_class;
       this.hotel.local = element.location_string;
       this.hotel.preco = element.hac_offers.offers[0].display_price_int;
-      this.hotel.foto_url = element.photo.images.medium.url;
+      if (!this.hotel.preco) {
+        this.hotel.preco = '0';
+      }
+      this.hotel.fotoUrl = element.photo.images.medium.url;
+      this.hotel.checkIn = this.datepipe.transform(checkin, 'dd/MM/yyyy');
+      this.hotel.adultos = adults;
+      this.hotel.noites = nights;
+      this.hotel.quartos = rooms;
+      this.hotel.storageKey = 'item' + this.hotel.id;
       this.hoteis.push(this.hotel);
     });
     console.log(this.hoteis);
+  }
+
+  addCarrinho() {
+    localStorage.setItem('item' + this.hotelSelecionado.id, JSON.stringify(this.hotelSelecionado));
+    this.modalRef.hide();
+  }
+
+
+  openModal(template: TemplateRef<any>, hotel: Hotel) {
+    this.hotelSelecionado = hotel;
+    this.modalRef = this.modalService.show(template);
   }
 
 }

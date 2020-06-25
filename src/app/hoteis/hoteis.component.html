@@ -1,5 +1,5 @@
 <div class="container" style="padding: 0px;">
-  <div class="jumbotron jumbotron-fluid">
+  <div class="jumbotron jumbotron-fluid jumbotron-with-background">
       <div class="container">
       <h1 class="display-4">Encontre aqui os melhores hoteis</h1>
       <p class="lead">Confira as promoções incríveis que temos para pacotes com tudo incluso!</p>
@@ -14,18 +14,49 @@
 <br>
    <div class="row">
     <div *ngFor="let hot of hoteis" class="col-md-4">
-      <div class="card border-info" style="height:440px;">
-          <img [src]="hot.foto_url" class="card-img-top" alt="foto">
+      <div class="card border-info" style="height:470px;">
+          <img [src]="hot.fotoUrl" class="card-img-top" alt="foto">
           <h5 class="card-header">{{hot.nome}}</h5>
           <div class="card-body">
-            <h6 class="card-title">R$ {{hot.preco}},00</h6>
+            <h6 class="card-title">R$ {{hot.preco}},00 / Por noite</h6>
             <h6 class="card-subtitle mb-2 text-muted"> Nota: {{hot.nota}} </h6>
             <p class="card-text">
               {{hot.local}}
+              <br>
+              Check-in: {{hot.checkIn}}       Adultos: {{hot.adultos}}
+              <br>
+              Quartos: {{hot.quartos}}        Noites: {{hot.noites}}
             </p>
-            <button type="button" class="btn btn-primary" >Ver agora</button>
+            <button type="button" class="btn btn-primary" (click)="openModal(template, hot)" >Ver agora</button>
           </div>
       </div> <br>
     </div>
   </div>
+
+   <!-- Modal suspenso com o Hotel selecionado -->
+   <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Garanta sua reserva em {{hotelSelecionado.nome}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Em: {{hotelSelecionado.local}}
+      <br>
+      Check-in: {{hotelSelecionado.checkIn}}
+      <br>
+      Adultos: {{hotelSelecionado.adultos}}
+      <br>
+      Quartos: {{hotelSelecionado.quartos}}
+      <br>
+      Noites: {{hotelSelecionado.noites}}
+      <br><br>
+      <h6 class="mb-2 text-muted"> Valor total </h6>
+      <h4>R$ {{hotelSelecionado.preco}},00 / Por noite</h4>
+
+        <br>
+        <button type="button" class="btn btn-primary" [routerLink]="['/carrinho']" (click)="addCarrinho()">Adicionar ao carrinho</button>
+    </div>
+  </ng-template>
 </div>
