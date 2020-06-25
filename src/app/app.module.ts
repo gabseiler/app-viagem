@@ -22,6 +22,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { LoginComponent } from './login/login.component';
 import { HoteisComponent } from './hoteis/hoteis.component';
+import { BuscaHoteisComponent } from './busca-hoteis/busca.hoteis.component';
 
 
 
@@ -34,7 +35,8 @@ import { HoteisComponent } from './hoteis/hoteis.component';
       RodapeComponent,
       CarrinhoComponent,
       LoginComponent,
-      HoteisComponent
+      HoteisComponent,
+      BuscaHoteisComponent
    ],
    imports: [
       BrowserModule,

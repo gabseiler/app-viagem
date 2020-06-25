@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
   }
 
   async buscarVoos(voo: any) {
-    console.log(voo);
     this.vooservice.getVoo(voo.origem, voo.destino,
       voo.dataIda, voo.dataVolta).subscribe(dados => {
         this.quotes = dados['Quotes'];
@@ -45,8 +44,7 @@ export class HomeComponent implements OnInit {
 
         if (voo.dataVolta === 'anytime') {
           this.somenteIda = true;
-        }
-        else {
+        } else {
           this.somenteIda = false;
         }
         this.montarVoos(this.somenteIda);

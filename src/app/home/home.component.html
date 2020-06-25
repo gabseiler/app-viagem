@@ -2,21 +2,16 @@
 <div class="container" style="padding: 0px;">
   <div class="jumbotron jumbotron-fluid">
       <div class="container">
-      <h1 class="display-4">Encontre seu passeio ideal aqui</h1>
+      <h1 class="display-4">Encontre aqui os melhores voos</h1>
       <p class="lead">Confira as promoções incríveis que temos para pacotes com tudo incluso!</p>
       </div>
   </div>
 </div>
 
 <div class="container" style="padding: 0px;">
-  <div class="row">
-    <div class="col-sm-12">
-
     <!-- componente de busca -->
-      <app-busca (respostaVoos)='buscarVoos($event)'> </app-busca>
+  <app-busca (respostaVoos)='buscarVoos($event)'> </app-busca>
 
-    </div>
-  </div>
   <br>
   
   <!-- Mensagem de erro para quando nao for encontrado Voo -->

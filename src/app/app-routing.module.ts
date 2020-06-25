@@ -4,9 +4,12 @@ import { HomeComponent } from './home/home.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { LoginComponent } from './login/login.component';
+import { HoteisComponent } from './hoteis/hoteis.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
+    { path: 'voos', component: HomeComponent},
+    { path: 'hoteis', component: HoteisComponent},
     { path: 'login', component: LoginComponent},
     {
         path: '',

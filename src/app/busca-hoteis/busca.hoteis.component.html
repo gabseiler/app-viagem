@@ -1,0 +1,43 @@
+<form #buscaForm="ngForm" (ngSubmit)="buscar()">
+  <div class="form-row busca">
+
+      <div class="col-md-4">
+        <h6>Cidade</h6>
+        <p-autoComplete [(ngModel)]="model.cidade" [suggestions]="locais" name="cidade"
+        (completeMethod)="buscarCidade($event)" placeholder="Cidade"
+        [size]="40" (onSelect)="onSelected($event)" >
+          <ng-template let-cidade pTemplate="item">
+            <div>{{cidade.nome}}</div>
+          </ng-template>
+        </p-autoComplete>
+      </div>
+
+      <div class="col-md-3">
+        <h6>Data Check-in</h6>                  
+        <p-calendar [(ngModel)]="model.dataCheckin" name="dataCheckin" placeholder="Data Check-in"
+        showIcon="true" [style]="{'width':'90%'}" [inputStyle]="{'width':'85%'}" dateFormat="dd/mm/yy"></p-calendar>      
+      </div>
+
+      <div class="col-md-1">
+        <h6>Noites</h6>
+        <input class="form-control" min="1" max="15" [(ngModel)]="model.noites" name="noites" type="number" value="1" id="noites">
+      </div>
+
+      <div class="col-md-1">
+        <h6>Adultos</h6>
+        <input class="form-control" min="1" max="15" [(ngModel)]="model.adultos" name="adultos" type="number" value="1" id="adultos">
+      </div>
+
+      <div class="col-md-1">
+        <h6>Quartos</h6>
+        <input class="form-control" min="1" max="15" [(ngModel)]="model.quartos" name="quartos" type="number" value="1" id="quartos">
+      </div>
+
+      <div class="col-md-1">
+        <br> 
+         <button pButton type="submit" label="Buscar" class="ui-button-info ui-button-raised ui-button-rounded"></button>
+       </div>
+
+
+  </div>
+</form>

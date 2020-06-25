@@ -1,3 +1,31 @@
-<p>
-  hoteis works!
-</p>
+<div class="container" style="padding: 0px;">
+  <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+      <h1 class="display-4">Encontre aqui os melhores hoteis</h1>
+      <p class="lead">Confira as promoções incríveis que temos para pacotes com tudo incluso!</p>
+      </div>
+  </div>
+</div>
+
+<div class="container" style="padding: 0px;">
+
+    <!-- Busca hoteis -->
+   <app-busca-hoteis (respostaBusca)='buscarHoteis($event)'></app-busca-hoteis>
+<br>
+   <div class="row">
+    <div *ngFor="let hot of hoteis" class="col-md-4">
+      <div class="card border-info" style="height:440px;">
+          <img [src]="hot.foto_url" class="card-img-top" alt="foto">
+          <h5 class="card-header">{{hot.nome}}</h5>
+          <div class="card-body">
+            <h6 class="card-title">R$ {{hot.preco}},00</h6>
+            <h6 class="card-subtitle mb-2 text-muted"> Nota: {{hot.nota}} </h6>
+            <p class="card-text">
+              {{hot.local}}
+            </p>
+            <button type="button" class="btn btn-primary" >Ver agora</button>
+          </div>
+      </div> <br>
+    </div>
+  </div>
+</div>
