@@ -23,6 +23,9 @@ import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { LoginComponent } from './login/login.component';
 import { HoteisComponent } from './hoteis/hoteis.component';
 import { BuscaHoteisComponent } from './busca-hoteis/busca.hoteis.component';
+import { ReservasComponent } from './reservas/reservas.component';
+import { FinalizarCompraComponent } from './finalizar-compra/finalizar-compra.component';
+import { VoosComponent } from './voos/voos.component';
 
 
 
@@ -36,7 +39,10 @@ import { BuscaHoteisComponent } from './busca-hoteis/busca.hoteis.component';
       CarrinhoComponent,
       LoginComponent,
       HoteisComponent,
-      BuscaHoteisComponent
+      BuscaHoteisComponent,
+      ReservasComponent,
+      FinalizarCompraComponent,
+      VoosComponent
    ],
    imports: [
       BrowserModule,

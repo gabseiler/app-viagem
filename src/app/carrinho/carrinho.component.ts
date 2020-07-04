@@ -44,7 +44,7 @@ export class CarrinhoComponent implements OnInit {
   }
 
   mudarPreco(i: number, qtd: number) {
-    this.voos[i].precoTotal = Number(this.voos[i].precoUnit) * qtd + '';
+    this.voos[i].precoTotal = Number(this.voos[i].precoUnit) * qtd ;
     this.calcularTotal();
   }
   excluir(key: string) {

@@ -1,121 +1,91 @@
 
 <div class="container" style="padding: 0px;">
-  <div class="jumbotron jumbotron-fluid jumbotron-with-background ">
+  <div class="jumbotron jumbotron-fluid jumbotron-with-background bg-cover">
+    <div class="overlay"></div>
       <div class="container">
-      <h1 class="display-4">Encontre aqui os melhores voos</h1>
+      <h1 class="display-4">Encontre aqui os melhores pacotes para você e a sua família!</h1>
       <p class="lead">Confira as promoções incríveis que temos para pacotes com tudo incluso!</p>
       </div>
   </div>
 </div>
 
+
 <div class="container" style="padding: 0px;">
-    <!-- componente de busca -->
-  <app-busca (respostaVoos)='buscarVoos($event)'> </app-busca>
 
+    <!-- Busca hoteis -->
+  <app-busca-hoteis (respostaBusca)='buscar($event)' [sePacotes]="true"></app-busca-hoteis>
   <br>
-  
-  <!-- Mensagem de erro para quando nao for encontrado Voo -->
-  <div class="row">    
-      <div *ngIf="!voos || voos.length == 0" class="col-md-12">
-        <div class="card text-center text-white bg-primary border-warning ">
-          <div class="card-header"><h5>Ops...</h5></div>
-          <div class="card-body ">
-            <h5 class="card-title">Não encontramos os vôos para as datas desejadas, 
-              por favor realize uma nova busca!</h5>
-            <p class="card-text">Estamos sempre buscando as melhores opções para você!</p>
-          </div>
-        </div>
-      </div>
-  </div>
-  
-  <!-- Lista de Voos para somente Ida -->
-  <div *ngIf="somenteIda" class="row">
-    <div *ngFor="let voo of voos" class="col-md-4">
-      <div class="card border-info" style="height:400px;">
-          <h5 class="card-header">{{voo.destinoIda | slice:0:50}}</h5>
+
+  <div *ngFor="let voo of voos; let i = index" class="row">
+    <div *ngIf="voos && hoteis" class="col-md-12">
+        <div class="card border-info">
+          <h5 class="card-header">Confira {{hoteis[i] ? hoteis[i].noites : 0}} dias em {{voo.cidadeDestino}} em Hotel {{hoteis[i] ? (hoteis[i].nota | number : '1.0-0') : 0 | number : '1.0-0' }} estrelas</h5>
           <div class="card-body">
-            <h6 class="card-title">De:</h6>
-            <h6 class="card-subtitle mb-2 text-muted"> {{voo.origemIda}} <br> {{voo.companhiaIda}}</h6>
-            <h6 class="card-title">{{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaIda}}</h6>
-            <p class="card-text">
-              Data: {{voo.dataIda}}
-            </p>
-              <h5>R$ {{voo.precoUnit}},00 </h5>
-            <p class="card-text">
-              Parcelamos em até 10x sem juros!
-            </p>
-            <button type="button" class="btn btn-primary" (click)="openModal(template, voo)">Ver agora</button>
-          </div>
-      </div> <br>
-    </div>
-  </div>
-
-
-  <!-- Lista de Voos para Ida e Volta -->
-  <div *ngIf="!somenteIda" class="row">
-    <div *ngFor="let voo of voos" class="col-md-6">
-      <div class="card-group">
-        <div class="card border-info" style="height:350px;">
-            <h5 class="card-header">{{voo.destinoIda}}</h5>
-            <div class="card-body">
-              <h6 class="card-title">De:</h6>
-              <h6 class="card-subtitle mb-2 text-muted"> {{voo.origemIda}} <br> {{voo.companhiaIda}}</h6>
-              <h6 class="card-title">{{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaIda}}</h6>
-              <p class="card-text">
-                Data: {{voo.dataIda}}<br>
-              </p>
+            <div class="float-left w-25">
+              <h5>Por apenas R$ {{(voo.precoTotal + (hoteis[i] ? hoteis[i].preco : 0))}},00 </h5>
+              <br> 
+              <h6 class="card-title"><i class="fa fa-bed" style="font-size: 1em"></i>{{hoteis[i] ? hoteis[i].quartos : 0}} Quarto(s)</h6>
+              <br>
+              <h6 class="card-title"><span class="pi pi-user" style="font-size: 1em"></span> {{hoteis[i] ? hoteis[i].adultos : 0}} Adulto(s)</h6>
             </div>
-        </div>
-        <div class="card border-info" style="height:350px;">
-          <h5 class="card-header">{{voo.destinoVolta}}</h5>
-          <div class="card-body">
-            <h6 class="card-title">De:</h6>
-            <h6 class="card-subtitle mb-2 text-muted"> {{voo.origemVolta}} <br> {{voo.companhiaVolta}}</h6>
-            <h6 class="card-title">{{voo.origemSiglaVolta}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaVolta}}</h6>
-            <p class="card-text">
-              Data: {{voo.dataVolta}}<br>
-            </p>
-              <h5>R$ {{voo.precoUnit}},00 </h5>
-            <p class="card-text">
-              Parcelamos em até 10x sem juros!
-            </p>
-            <button type="button" class="btn btn-primary" (click)="openModal(template, voo)">Ver agora</button>
+            <div class="float-left w-25">
+              <img [src]="hoteis[i] ? hoteis[i].fotoUrl : '' " class="card-img-top p-2" alt="foto">
+            </div>
+            <div class="float-left w-25">
+              <h6 class="card-title">Partindo de:</h6>
+              <h6 class="card-subtitle mb-2 text-muted">Aeroporto {{voo.origemIda}} <br> {{voo.companhiaIda}}</h6>
+              {{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaIda}}
+            </div>
+            <div class="float-left w-25">
+              <h6 class="card-title">Para: </h6>
+              <h6 class="card-subtitle mb-2 text-muted">Aeroporto {{voo.origemVolta}} <br> {{voo.companhiaVolta}}</h6>
+              {{voo.origemSiglaVolta}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaVolta}}
+              <br>
+              <br><br>
+              <button type="button" class="btn btn-md btn-info mt-auto" (click)="openModal(template,voo,hoteis[i])">Ver mais detalhes</button>
+            </div>
           </div>
-      </div>
-      </div> <br>
+        </div>
     </div>
   </div>
 
 
-  <!-- Modal suspenso com o Voo selecionado -->
-  <ng-template #template>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Garanta já sua viagem para {{vooSelecionado.destinoIda}}</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      Partindo de: {{vooSelecionado.origemIda}}
-      <h6>{{vooSelecionado.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{vooSelecionado.destinoSiglaIda}}</h6>
-      Data e horário: {{vooSelecionado.dataIda}}
-      <br><br>
-      <div *ngIf="!somenteIda">
-        Voltando de: {{vooSelecionado.origemVolta}}
-        <h6>{{vooSelecionado.origemSiglaVolta}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{vooSelecionado.destinoSiglaVolta}}</h6>
-        Data e horário: {{vooSelecionado.dataVolta}}
-      </div>
-      <br><br>
-      <h6 class="mb-2 text-muted"> Valor total </h6>
-      <h4>R$ {{vooSelecionado.precoTotal}},00</h4>
 
-        <label for="example-number-input" class="col-2-sm col-form-label">Quantidade:</label>
-        <div class="col-3-sm">
-          <input class="form-control" min="1" max="15" [(ngModel)]="qtd" type="number" value="1" id="qtd" (click)="mudarPreco()">
-        </div>
-        <br>
-        <button type="button" class="btn btn-primary" [routerLink]="['/carrinho']" (click)="addCarrinho()">Adicionar ao carrinho</button>
+<!-- Modal suspenso com o Voo selecionado -->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Garanta já sua viagem para {{vooSelecionado.cidadeDestino}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6 class="mb-2 text-muted"> Informações sobre o voo:  </h6>
+    Partindo de: {{vooSelecionado.origemIda}}
+    <h6>{{vooSelecionado.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{vooSelecionado.destinoSiglaIda}}</h6>
+    Data e horário: {{vooSelecionado.dataIda}}
+    <br><br>
+    <div>
+      Voltando de: {{vooSelecionado.origemVolta}}
+      <h6>{{vooSelecionado.origemSiglaVolta}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{vooSelecionado.destinoSiglaVolta}}</h6>
+      Data e horário: {{vooSelecionado.dataVolta}}
     </div>
-  </ng-template>
+  </div>
 
+  <div class="modal-body">
+    <h6 class="mb-2 text-muted"> Informações sobre o hotel:  </h6>
+    <h6 class="card-title">Hotel {{hotelSelecionado.nome}} </h6>
+    <h6 class="mb-2 text-muted"> Nota {{hotelSelecionado.nota}}  </h6>
+    Localizado em: {{hotelSelecionado.local}}
+    <br>
+    <h6 class="card-title"><i class="fa fa-bed" style="font-size: 1em"></i>{{hotelSelecionado.quartos}} Quarto(s)</h6>
+    <h6 class="card-title"><span class="pi pi-user" style="font-size: 1em"></span> {{hotelSelecionado.adultos}} Adulto(s)</h6>
+    <br>
+    <h6 class="mb-2 text-muted"> Valor total </h6>
+    <h4>R$ {{vooSelecionado.precoTotal + hotelSelecionado.preco}},00</h4>
+
+      <br>
+      <button type="button" class="btn btn-info" [routerLink]="['/carrinho']" (click)="addCarrinho()">Adicionar ao carrinho</button>
+  </div>
+</ng-template>
 </div>

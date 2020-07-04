@@ -3,7 +3,7 @@ export class Hotel {
     nome?: string;
     nota?: string;
     local?: string;
-    preco?: string;
+    preco?: number;
     fotoUrl?: string;
     checkIn?: string;
     adultos?: string;

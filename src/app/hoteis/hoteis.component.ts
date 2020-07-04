@@ -25,7 +25,8 @@ export class HoteisComponent implements OnInit {
 
   ngOnInit() {
     const a = {
-      cidadeId: '303631',
+      cidadeIdDestino: '303631',
+      cidadeDestino: 'São Paulo',
       dataCheckin: '2021-02-06',
       adultos: '1',
       quartos: '1',
@@ -35,9 +36,10 @@ export class HoteisComponent implements OnInit {
   }
 
    buscarHoteis(hoteis: any) {
-    console.log(hoteis);
-    this.hotelService.getHoteis(hoteis.cidadeId, hoteis.dataCheckin, hoteis.adultos, hoteis.noites, hoteis.quartos).subscribe(data => {
-      console.log(data['data']);
+    // console.log(hoteis);
+    this.hotelService.getHoteis(hoteis.cidadeIdDestino, hoteis.dataCheckin, hoteis.adultos, hoteis.noites, hoteis.quartos)
+                     .subscribe(data => {
+      // console.log(data['data']);
       this.aux  = data['data'];
       this.montarHoteis(hoteis.cidadeId, hoteis.dataCheckin, hoteis.adultos, hoteis.noites, hoteis.quartos);
     });
@@ -55,7 +57,19 @@ export class HoteisComponent implements OnInit {
       this.hotel.local = element.location_string;
       this.hotel.preco = element.hac_offers.offers[0].display_price_int;
       if (!this.hotel.preco) {
-        this.hotel.preco = '0';
+        if (this.hotel.nota === '1' || this.hotel.nota === '1.0') {
+          this.hotel.preco = 50;
+        } else if (this.hotel.nota === '2' || this.hotel.nota === '2.0') {
+          this.hotel.preco = 125;
+        } else if (this.hotel.nota === '3' || this.hotel.nota === '3.0') {
+          this.hotel.preco = 200;
+        } else if (this.hotel.nota === '4' || this.hotel.nota === '4.0') {
+          this.hotel.preco = 350;
+        } else if (this.hotel.nota === '5' || this.hotel.nota === '5.0') {
+          this.hotel.preco = 760;
+        } else {
+          this.hotel.preco = 300;
+        }
       }
       this.hotel.fotoUrl = element.photo.images.medium.url;
       this.hotel.checkIn = this.datepipe.transform(checkin, 'dd/MM/yyyy');
@@ -65,7 +79,6 @@ export class HoteisComponent implements OnInit {
       this.hotel.storageKey = 'item' + this.hotel.id;
       this.hoteis.push(this.hotel);
     });
-    console.log(this.hoteis);
   }
 
   addCarrinho() {

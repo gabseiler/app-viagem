@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { debounceTime, retry, delay, retryWhen, mergeMap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,7 +24,7 @@ export class VoosService {
   constructor(private http: HttpClient) { }
 
    getAirport(city: any) {
-    return this.http.get(this.baseUrlPlaces + '?query=' + city, httpOptions);
+    return this.http.get(this.baseUrlPlaces + '?query=' + city, httpOptions).pipe(debounceTime(300));
    }
 
    getVoo(origem: any, destino: any, dataIda: any, dataVolta: any) {

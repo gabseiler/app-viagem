@@ -1,5 +1,6 @@
 <div class="container" style="padding: 0px;">
-  <div class="jumbotron jumbotron-fluid jumbotron-with-background">
+  <div class="jumbotron jumbotron-fluid jumbotron-with-background bg-cover">
+    <div class="overlay"></div>
       <div class="container">
       <h1 class="display-4">Encontre aqui os melhores hoteis</h1>
       <p class="lead">Confira as promoções incríveis que temos para pacotes com tudo incluso!</p>
@@ -10,8 +11,21 @@
 <div class="container" style="padding: 0px;">
 
     <!-- Busca hoteis -->
-   <app-busca-hoteis (respostaBusca)='buscarHoteis($event)'></app-busca-hoteis>
+   <app-busca-hoteis (respostaBusca)='buscarHoteis($event)' [sePacotes]="false"></app-busca-hoteis>
 <br>
+  <!-- Mensagem de erro para quando nao for encontrado Voo -->
+  <div class="row">    
+    <div *ngIf="!hoteis || hoteis.length == 0" class="col-md-12">
+      <div class="card text-center text-white bg-info border-warning ">
+        <div class="card-header"><h5>Ops...</h5></div>
+        <div class="card-body ">
+          <h5 class="card-title">Não encontramos hospedagens disponiveis nas datas desejadas, 
+            por favor realize uma nova busca!</h5>
+          <p class="card-text">Estamos sempre buscando as melhores opções para você!</p>
+        </div>
+      </div>
+    </div>
+  </div>
    <div class="row">
     <div *ngFor="let hot of hoteis" class="col-md-4">
       <div class="card border-info" style="height:470px;">
@@ -27,7 +41,7 @@
               <br>
               Quartos: {{hot.quartos}}        Noites: {{hot.noites}}
             </p>
-            <button type="button" class="btn btn-primary" (click)="openModal(template, hot)" >Ver agora</button>
+            <button type="button" class="btn btn-info" (click)="openModal(template, hot)" >Ver agora</button>
           </div>
       </div> <br>
     </div>
@@ -56,7 +70,7 @@
       <h4>R$ {{hotelSelecionado.preco}},00 / Por noite</h4>
 
         <br>
-        <button type="button" class="btn btn-primary" [routerLink]="['/carrinho']" (click)="addCarrinho()">Adicionar ao carrinho</button>
+        <button type="button" class="btn btn-info" [routerLink]="['/carrinho']" (click)="addCarrinho()">Adicionar ao carrinho</button>
     </div>
   </ng-template>
 </div>

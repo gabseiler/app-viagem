@@ -4,7 +4,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 const httpOptions = {
   headers: new HttpHeaders({
     'x-rapidapi-host': 'tripadvisor1.p.rapidapi.com',
-    'x-rapidapi-key': '4bf058aaedmshcc2bece183a5c6dp167b49jsn285f6fdd4888',
+    'x-rapidapi-key': '0e3056d71amshd616de54b80603dp1c42c3jsna531b4e8b76c',
     'useQueryString': 'true',
     'Access-Control-Allow-Origin': '*'
   })

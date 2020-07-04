@@ -1,49 +1,80 @@
 <div class="container" style="padding: 0px;">
-    <br>
-    <div class="row">
-        <div class="col-sm-12">
-            <h1>Seu carrinho:</h1>
-            <br>
-            <div class="card" *ngFor="let voo of voos;let i = index;">
-                <div class="card-body">
-                  <h5 class="card-title">Passagem: {{voo.destinoIda}}</h5>
-                  <p class="card-text">
-                    Partindo de: {{voo.origemIda}}</p>
-                  <h6>{{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span> {{voo.destinoSiglaIda}}</h6>
-                  <br>
-                  <p class="card-text">
-                    Data e horário: {{voo.dataIda}}
-                  </p>
-                  <p class="card-text">R$ {{voo.precoTotal}},00</p>
-                  <label for="example-number-input" class="col-2-sm col-form-label">Quantidade:</label>
-                  <div class="col-3-sm">
-                    <input class="form-control" min="1" max="15" [(ngModel)]="voos[i].qtd" type="number" [value]="voo.qtd" id="qtd" (click)="mudarPreco(i,voo.qtd)">
-                  </div>
-                  <br>
-                  <button  class="btn btn-primary" (click)="excluir(this.voo.storageKey)"> <span class="pi pi-trash"  style="font-size: 1em"></span> Remover</button>
-                </div>
-            </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Seu carrinho:</h1>
+    </div>
+  </div>
+  <br>
 
-            <div class="card" *ngFor="let hot of hoteis;let i = index;">
-              <div class="card-body">
-                <h5 class="card-title">Hospedagem: {{hot.nome}}</h5>
-                <p class="card-text">
-                  Em: {{hot.local}}</p>
-                <br>
-                <p class="card-text">
-                  Data: {{hot.checkIn}}
-                </p>
-                <p class="card-text">R$ {{hot.preco}},00</p>
-                <br>
-                <button  class="btn btn-primary" (click)="excluir(this.hot.storageKey)"> <span class="pi pi-trash"  style="font-size: 1em"></span> Remover</button>
-              </div>
+
+  <div *ngFor="let voo of voos; let i = index" class="row">
+    <div *ngIf="voos" class="col-md-12">
+      <div class="card border-info">
+        <div class="card-body">
+          <h5 class="card-title">Passagem: {{voo.destinoIda}}</h5>
+          <p class="card-text">
+            Partindo de: {{voo.origemIda}}</p>
+          <h6>{{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span>
+            {{voo.destinoSiglaIda}}
+          </h6>
+          <br>
+          <p class="card-text">
+            Data e horário: {{voo.dataIda}}
+          </p>
+          <p class="card-text">R$ {{voo.precoTotal}},00</p>
+          <label for="example-number-input" class="col-2-sm col-form-label">Quantidade: {{voo.qtd}}</label>
+
+          <br>
+          <button class="btn btn-info" (click)="excluir(this.voo.storageKey)"> <span class="pi pi-trash"
+              style="font-size: 1em"></span> Remover</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div *ngFor="let hot of hoteis;let i = index;" class="row">
+    <div *ngIf="hoteis" class="col-md-12">
+      <div class="card border-info">
+        <div class="card-body">
+          <div class="float-left w-50">
+            <h5 class="card-title">Hospedagem: {{hot.nome}}</h5>
+            <p class="card-text">
+              Em: {{hot.local}}</p>
+            <br>
+            <p class="card-text">
+              Data: {{hot.checkIn}}
+            </p>
+            <h6 class="card-text"><i class="fa fa-bed" style="font-size: 1em"></i>{{hot.quartos}} Quarto(s)</h6>
+            <h6 class="card-text"><span class="pi pi-user" style="font-size: 1em"></span> {{hot.adultos}} Adulto(s)</h6>
+            <p class="card-text">R$ {{hot.preco}},00</p>
+            <br>
+            <button class="btn btn-info" (click)="excluir(this.hot.storageKey)"> <span class="pi pi-trash"
+                style="font-size: 1em"></span> Remover</button>
+          </div>
+          <div class="float-left w-50">
+            <img [src]="hot.fotoUrl" class="img-thumbnail rounded float-right" alt="foto">
           </div>
         </div>
+      </div>
     </div>
-    <br>
-    <div class=" float-right">
-      <h6>Total: R$ {{total}},00</h6>
+  </div>
+  <br>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class=" float-right">
+        <h6>Total: R$ {{total}},00</h6>
+      </div>
     </div>
-    <br>
-    <button type="button" class="btn btn-primary float-right">Finalizar compra</button>
-</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-info float-right" [routerLink]="['/finalizar-compra']">Finalizar
+        compra</button>
+    </div>
+  </div>

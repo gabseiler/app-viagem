@@ -1,7 +1,7 @@
 export class Voo {
     id?: string;
-    precoUnit?: string;
-    precoTotal?: string;
+    precoUnit?: number;
+    precoTotal?: number;
     direto?: string;
     companhiaIda?: string;
     origemIda?: string;
@@ -16,6 +16,8 @@ export class Voo {
     destinoSiglaVolta?: string;
     dataVolta?: string;
     qtd?: number;
+    cidadeDestino?: string;
+    paisDestino?: string;
     // 1 = voo, 2 = hotel
     tipo = 1;
     storageKey?: string;
@@ -30,5 +32,6 @@ export class Aeroporto {
     PlaceId?: string;
     Name?: string;
     CityName?: string;
+    CountryName?: string;
     IataCode?: string;
 }

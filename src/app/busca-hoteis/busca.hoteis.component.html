@@ -1,11 +1,11 @@
-<form #buscaForm="ngForm" (ngSubmit)="buscar()">
-  <div class="form-row busca">
+<form *ngIf="!sePacotes" #buscaForm="ngForm" (ngSubmit)="buscar()">
+  <div class="form-row bg-warning p-1">
 
       <div class="col-md-4">
         <h6>Cidade</h6>
-        <p-autoComplete [(ngModel)]="model.cidade" [suggestions]="locais" name="cidade"
+        <p-autoComplete [(ngModel)]="model.cidadeDestino" [suggestions]="locais" name="cidadeDestino"
         (completeMethod)="buscarCidade($event)" placeholder="Cidade"
-        [size]="40" (onSelect)="onSelected($event)" >
+        [size]="40" (onSelect)="onSelected($event,true)" >
           <ng-template let-cidade pTemplate="item">
             <div>{{cidade.nome}}</div>
           </ng-template>
@@ -15,7 +15,7 @@
       <div class="col-md-3">
         <h6>Data Check-in</h6>                  
         <p-calendar [(ngModel)]="model.dataCheckin" name="dataCheckin" placeholder="Data Check-in"
-        showIcon="true" [style]="{'width':'90%'}" [inputStyle]="{'width':'85%'}" dateFormat="dd/mm/yy"></p-calendar>      
+        [style]="{'width':'98%'}" [inputStyle]="{'width':'95%'}" dateFormat="dd/mm/yy"></p-calendar>      
       </div>
 
       <div class="col-md-1">
@@ -35,7 +35,61 @@
 
       <div class="col-md-1">
         <br> 
-         <button pButton type="submit" label="Buscar" class="ui-button-info ui-button-raised ui-button-rounded"></button>
+        <button pButton type="submit" label="Buscar" class="ui-button-secondary ui-button-raised"></button>
+       </div>
+
+
+  </div>
+</form>
+
+<form *ngIf="sePacotes" #buscaForm="ngForm" (ngSubmit)="buscar()">
+  <div class="form-row bg-warning p-1">
+
+      <div class="col-md-3">
+        <h6>Cidade Origem</h6>
+        <p-autoComplete [(ngModel)]="model.cidadeOrigem" [suggestions]="locais" name="cidadeOrigem"
+        (completeMethod)="buscarCidade($event)" placeholder="Origem"
+        [size]="30" (onSelect)="onSelected($event,false)" >
+          <ng-template let-cidade pTemplate="item">
+            <div>{{cidade.nome}}</div>
+          </ng-template>
+        </p-autoComplete>
+      </div>
+      <div class="col-md-3">
+        <h6>Cidade Destino</h6>
+        <p-autoComplete [(ngModel)]="model.cidadeDestino" [suggestions]="locais" name="cidadeDestino"
+        (completeMethod)="buscarCidade($event)" placeholder="Destino"
+        [size]="30" (onSelect)="onSelected($event,true)" >
+          <ng-template let-cidade pTemplate="item">
+            <div>{{cidade.nome}}</div>
+          </ng-template>
+        </p-autoComplete>
+      </div>
+
+      <div class="col-md-2">
+        <h6>Data Check-in</h6>                  
+        <p-calendar [(ngModel)]="model.dataCheckin" name="dataCheckin" placeholder="Data Check-in"
+        [style]="{'width':'98%'}" [inputStyle]="{'width':'95%'}" dateFormat="dd/mm/yy"></p-calendar>      
+      </div>
+
+      <div class="col-md-1">
+        <h6>Noites</h6>
+        <input class="form-control" min="1" max="15" [(ngModel)]="model.noites" name="noites" type="number" value="1" id="noites">
+      </div>
+
+      <div class="col-md-1">
+        <h6>Adultos</h6>
+        <input class="form-control" min="1" max="15" [(ngModel)]="model.adultos" name="adultos" type="number" value="1" id="adultos">
+      </div>
+
+      <div class="col-md-1">
+        <h6>Quartos</h6>
+        <input class="form-control" min="1" max="15" [(ngModel)]="model.quartos" name="quartos" type="number" value="1" id="quartos">
+      </div>
+
+      <div class="col-md-1">
+        <br> 
+        <button pButton type="submit" label="Buscar" class="ui-button-secondary ui-button-raised"></button>
        </div>
 
 

@@ -1,5 +1,5 @@
 <form #buscaForm="ngForm" (ngSubmit)="buscar()">
-  <div class="form-row busca">
+  <div class="form-row bg-warning p-1">
     <div class="col-md-3">
       <h6>Origem</h6>
       <p-autoComplete [(ngModel)]="model.origem" [suggestions]="recebeVoos" name="origem"
@@ -33,18 +33,18 @@
     <div class="col-md-2">
       <h6>Data Ida</h6>                  
       <p-calendar [(ngModel)]="model.dataIda" name="dataIda" placeholder="Quando vai?"
-      showIcon="true" [style]="{'width':'80%'}" [inputStyle]="{'width':'75%'}" dateFormat="dd/mm/yy"></p-calendar>      
+      [style]="{'width':'98%'}" [inputStyle]="{'width':'95%'}" dateFormat="dd/mm/yy"></p-calendar>      
     </div>
 
     <div class="col-md-2" *ngIf="!somenteIda">
       <h6>Data Volta</h6>                  
       <p-calendar [(ngModel)]="model.dataVolta" name="dataVolta" placeholder="Quando volta?"
-      [showIcon]="true" [style]="{'width':'80%'}" [inputStyle]="{'width':'75%'}" dateFormat="dd/mm/yy"></p-calendar>
+       [style]="{'width':'98%'}" [inputStyle]="{'width':'95%'}" dateFormat="dd/mm/yy"></p-calendar>
     </div>
 
     <div class="col-md-1">
      <br> 
-      <button pButton type="submit" label="Buscar" class="ui-button-info ui-button-raised ui-button-rounded"></button>
+      <button pButton type="submit" label="Buscar" class="ui-button-secondary ui-button-raised"></button>
     </div>
   </div>
 </form>

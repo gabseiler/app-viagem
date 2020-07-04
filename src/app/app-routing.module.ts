@@ -5,10 +5,13 @@ import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { LoginComponent } from './login/login.component';
 import { HoteisComponent } from './hoteis/hoteis.component';
+import { ReservasComponent } from './reservas/reservas.component';
+import { FinalizarCompraComponent } from './finalizar-compra/finalizar-compra.component';
+import { VoosComponent } from './voos/voos.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
-    { path: 'voos', component: HomeComponent},
+    { path: 'voos', component: VoosComponent},
     { path: 'hoteis', component: HoteisComponent},
     { path: 'login', component: LoginComponent},
     { path: 'carrinho', component: CarrinhoComponent},
@@ -17,7 +20,8 @@ export const routes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'car', component: CarrinhoComponent},
+            { path: 'reservas', component: ReservasComponent},
+            { path: 'finalizar-compra', component: FinalizarCompraComponent},
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

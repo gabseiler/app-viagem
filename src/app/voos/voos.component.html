@@ -1,0 +1,134 @@
+<div class="container" style="padding: 0px;">
+  <div class="jumbotron jumbotron-fluid jumbotron-with-background bg-cover">
+    <div class="overlay"></div>
+    <div class="container">
+      <h1 class="display-4">Encontre aqui os melhores voos</h1>
+      <p class="lead">Confira as promoções incríveis que temos para pacotes com tudo incluso!</p>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="padding: 0px;">
+  <!-- componente de busca -->
+  <app-busca (respostaVoos)='buscarVoos($event)'> </app-busca>
+
+  <br>
+
+  <!-- Mensagem de erro para quando nao for encontrado Voo -->
+  <div class="row">
+    <div *ngIf="!voos || voos.length == 0" class="col-md-12">
+      <div class="card text-center text-white bg-info border-warning ">
+        <div class="card-header">
+          <h5>Ops...</h5>
+        </div>
+        <div class="card-body ">
+          <h5 class="card-title">Não encontramos os vôos para as datas desejadas,
+            por favor realize uma nova busca!</h5>
+          <p class="card-text">Estamos sempre buscando as melhores opções para você!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Voos para somente Ida -->
+  <div *ngIf="somenteIda" class="row">
+    <div *ngFor="let voo of voos" class="col-md-4">
+      <div class="card border-info" style="height:400px;">
+        <h5 class="card-header">{{voo.destinoIda | slice:0:50}}</h5>
+        <div class="card-body">
+          <h6 class="card-title">De:</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Aeroporto {{voo.origemIda}} <br> {{voo.companhiaIda}}</h6>
+          <h6 class="card-title">{{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span>
+            {{voo.destinoSiglaIda}}</h6>
+          <p class="card-text">
+            Data: {{voo.dataIda}}
+          </p>
+          <h5>R$ {{voo.precoUnit}},00 </h5>
+          <p class="card-text">
+            Parcelamos em até 10x sem juros!
+          </p>
+          <button type="button" class="btn btn-info" (click)="openModal(template, voo)">Ver agora</button>
+        </div>
+      </div> <br>
+    </div>
+  </div>
+
+
+  <!-- Lista de Voos para Ida e Volta -->
+  <div *ngIf="!somenteIda" class="row">
+    <div *ngFor="let voo of voos" class="col-md-12">
+      <div class="card border-info">
+        <h5 class="card-header">Viaje para o {{voo.cidadeDestino}} - {{voo.paisDestino}}</h5>
+        <div class="card-body">
+          <div class="float-left w-25">
+            <h6 class="card-title">Ida: {{voo.dataIda}}</h6>
+            <br>
+            <h6 class="card-subtitle mb-2 text-muted">De: Aeroporto {{voo.origemIda}} <br> {{voo.companhiaIda}}</h6>
+            <br>
+            <h6 class="card-subtitle mb-2 text-muted">Para: Aeroporto {{voo.destinoIda}} <br></h6>
+            {{voo.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span>
+            {{voo.destinoSiglaIda}}
+          </div>
+          <div class="float-left w-25">
+            <h6 class="card-title">Volta: {{voo.dataVolta}} </h6>
+            <br>
+            <h6 class="card-subtitle mb-2 text-muted">De: Aeroporto {{voo.origemVolta}} <br> {{voo.companhiaVolta}}</h6>
+            <br>
+            <h6 class="card-subtitle mb-2 text-muted">Para: Aeroporto {{voo.origemVolta}} <br> {{voo.companhiaVolta}}
+            </h6>
+            {{voo.origemSiglaVolta}} <span class="pi pi-arrow-right" style="font-size: 1em"></span>
+            {{voo.destinoSiglaVolta}}
+          </div>
+          <div class="float-left w-25">
+            .
+          </div>
+          <div class="float-left w-25">
+            <h5>Por apenas R$ {{(voo.precoTotal)}},00 </h5>
+            <p class="card-text">
+              Parcelamos em até 10x sem juros!
+            </p>
+            <button type="button" class="btn btn-info" (click)="openModal(template, voo)">Ver agora</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal suspenso com o Voo selecionado -->
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Garanta já sua viagem para {{vooSelecionado.cidadeDestino}} -
+        {{vooSelecionado.paisDestino}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Partindo de: {{vooSelecionado.origemIda}}
+      <h6>{{vooSelecionado.origemSiglaIda}} <span class="pi pi-arrow-right" style="font-size: 1em"></span>
+        {{vooSelecionado.destinoSiglaIda}}</h6>
+      Data e horário: {{vooSelecionado.dataIda}}
+      <br><br>
+      <div *ngIf="!somenteIda">
+        Voltando de: {{vooSelecionado.origemVolta}}
+        <h6>{{vooSelecionado.origemSiglaVolta}} <span class="pi pi-arrow-right" style="font-size: 1em"></span>
+          {{vooSelecionado.destinoSiglaVolta}}</h6>
+        Data e horário: {{vooSelecionado.dataVolta}}
+      </div>
+      <br><br>
+      <h6 class="mb-2 text-muted"> Valor total </h6>
+      <h4>R$ {{vooSelecionado.precoTotal}},00</h4>
+
+      <label for="example-number-input" class="col-2-sm col-form-label">Quantidade:</label>
+      <div class="col-3-sm">
+        <input class="form-control" min="1" max="15" [(ngModel)]="qtd" type="number" value="1" id="qtd"
+          (click)="mudarPreco()">
+      </div>
+      <br>
+      <button type="button" class="btn btn-info" [routerLink]="['/carrinho']" (click)="addCarrinho()">Adicionar ao
+        carrinho</button>
+    </div>
+  </ng-template>
+
+</div>
