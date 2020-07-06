@@ -31,16 +31,13 @@ export class CarrinhoComponent implements OnInit {
     for (let a in localStorage) {
       if (a.includes('item')) {
         const i = JSON.parse(localStorage.getItem(a));
-        console.log(i);
         if (i != null && i['tipo'] === 1) {
           this.voos.push(i);
         } else if (i != null && i['tipo'] === 2) {
-          console.log('oi');
           this.hoteis.push(i);
         }
       }
    }
-   console.log(this.hoteis);
   }
 
   mudarPreco(i: number, qtd: number) {
@@ -73,6 +70,11 @@ export class CarrinhoComponent implements OnInit {
     }
 
     this.total = this.totalVoos + this.totalHoteis;
+  }
+
+  finalizar() {
+    localStorage.removeItem('precoTotal');
+    localStorage.setItem('precoTotal', this.total + '');
   }
 
 }

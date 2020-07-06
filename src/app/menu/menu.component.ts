@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,7 +9,7 @@ import { AuthService } from '../_services/auth.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alert: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -20,10 +21,12 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
+    this.authService.logout().subscribe(data =>
+      this.alert.message("Logout"));
+
     // tslint:disable-next-line: forin
     for (let a in localStorage) {
       localStorage.removeItem(a);
-
     }
   }
 }

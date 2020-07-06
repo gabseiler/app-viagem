@@ -1,3 +1,64 @@
-<p>
-  finalizar-compra works!
-</p>
+<div class="container" style="padding: 0px;">
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card border-info">
+        <div class="card-body">
+          <div class="float-left w-75">
+            <h5 class="card-title">Informações da compra:</h5>
+            <p *ngFor="let voo of voos">
+              - Voo para: {{voo.destinoIda}}
+            </p>
+            <p *ngFor="let hotel of hoteis">
+              - Hospedagem em: {{hotel.nome}}
+            </p>
+          </div>
+          <div class="float-left w-25">
+            <h5 class="card-title">
+              Valor Total: R${{precoTotal}},00
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card border-info">
+        <div class="card-body">
+          <h5 class="card-title">Forma de pagamento</h5>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="boleto"
+            (change)="onItemChange(true)" checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Boleto
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="isBoleto" class="col-md-8">
+      <div class="card border-info">
+        <div class="card-body">
+          <h5 class="card-title">Código de barras gerado:</h5>
+          <p>3213213 2132132432534 64531276987</p>
+
+          <button type="button" class="btn btn-info float-right" (click)="finalizar()" >Finalizar</button>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="!isBoleto" class="col-md-8">
+      <div class="card border-info">
+        <div class="card-body">
+          <h5 class="card-title">Cartão de crediot:</h5>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -7,18 +7,39 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-    baseUrl = 'http://localhost:5000/api/auth/';
+    baseUrl = 'https://api-app-viagem.herokuapp.com/rest-auth/';
 
-    decodedToken: any;
 
     constructor(private http: HttpClient) { }
 
     login(model: any) {
-      localStorage.setItem('token', model);
+      return this.http.post(this.baseUrl + 'login/', model).pipe(
+      map((response: any) => {
+            // em user tenho o token do response user['key']
+            const user = response;
+            // se for diferente de nulo
+            if (user) {
+              localStorage.setItem('token', user.key);
+            }
+      })
+    );
     }
 
     register(model: any) {
-      return this.http.post(this.baseUrl + 'register', model);
+      return this.http.post(this.baseUrl + 'registration/', model).pipe(
+        map((response: any) => {
+              // em user tenho o token do response user['token']
+              const user = response;
+              // se for diferente de nulo
+              if (user) {
+                localStorage.setItem('token', user.key);
+              }
+        })
+      );
+    }
+
+    logout() {
+      return this.http.post(this.baseUrl + 'logout/', '');
     }
 
     loggedIn() {

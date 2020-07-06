@@ -26,6 +26,8 @@ import { BuscaHoteisComponent } from './busca-hoteis/busca.hoteis.component';
 import { ReservasComponent } from './reservas/reservas.component';
 import { FinalizarCompraComponent } from './finalizar-compra/finalizar-compra.component';
 import { VoosComponent } from './voos/voos.component';
+import { RegistrarComponent } from './registrar/registrar.component';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 
 
@@ -42,7 +44,8 @@ import { VoosComponent } from './voos/voos.component';
       BuscaHoteisComponent,
       ReservasComponent,
       FinalizarCompraComponent,
-      VoosComponent
+      VoosComponent,
+      RegistrarComponent
    ],
    imports: [
       BrowserModule,
@@ -58,7 +61,8 @@ import { VoosComponent } from './voos/voos.component';
       BsDropdownModule.forRoot()
    ],
    providers: [
-      DatePipe
+      DatePipe,
+      ErrorInterceptorProvider
    ],
    bootstrap: [
       AppComponent
