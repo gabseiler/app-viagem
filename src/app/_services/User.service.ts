@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-  baseUrl = 'https://api-app-viagem.herokuapp.com/rest-auth/user';
+  baseUrl = 'https://api-app-viagem.herokuapp.com/rest-auth/user/';
 
 
   constructor(private http: HttpClient) { }
@@ -21,7 +21,9 @@ export class UserService {
           const user = response;
           // se for diferente de nulo
           if (user) {
-            localStorage.setItem('cliente', user.id);
+            localStorage.setItem('clienteId', user.pk);
+            localStorage.setItem('clienteNome', user.username);
+            localStorage.setItem('clienteEmail', user.email);
           }
     })
   );

@@ -54,7 +54,6 @@ export class VoosComponent implements OnInit {
 
   montarVoos(somenteIda: any) {
     this.voos = new Array();
-    console.log(this.quotes);
 
 
     this.quotes.forEach(element => {
@@ -86,7 +85,6 @@ export class VoosComponent implements OnInit {
         }
         this.voos.push(this.voo);
     });
-    console.log(this.voos);
   }
 
   openModal(template: TemplateRef<any>, voo: Voo) {

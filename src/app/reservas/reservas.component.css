@@ -1,0 +1,8 @@
+.menuitem {
+    cursor: pointer;
+    
+}
+.menuitem:hover {
+    color: gray;
+    
+}

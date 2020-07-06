@@ -4,4 +4,5 @@ export class Reserva {
     dataCompra?: string;
     precoTotal?: string;
     dataPagamento?: string;
+    costumer?: string;
 }

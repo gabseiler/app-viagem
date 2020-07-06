@@ -9,9 +9,11 @@ import { AlertifyService } from '../_services/alertify.service';
 })
 export class MenuComponent implements OnInit {
 
+  ClienteNome: any;
   constructor(private authService: AuthService, private alert: AlertifyService) { }
 
   ngOnInit() {
+    this.ClienteNome = localStorage.getItem('clienteNome');
   }
   loggedIn() {
     // const token = localStorage.getItem('token');

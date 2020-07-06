@@ -1,4 +1,4 @@
-<div class="container" style="padding: 0px;">
+<div *ngIf="!naoFinalizou" class="container" style="padding: 0px;">
   <br>
   <div class="row">
     <div class="col-md-12">
@@ -61,4 +61,20 @@
 
   </div>
 
+</div>
+
+<div *ngIf="naoFinalizou" class="container" style="padding: 0px;">
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card border-success text-center">
+        <div class="card-body">
+          <h1 class="card-title ">Compra Finalizada com Sucesso</h1>
+        </div>
+        <div class="card-footer text-muted">
+          Aguardando confirmação de pagamento do boleto
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

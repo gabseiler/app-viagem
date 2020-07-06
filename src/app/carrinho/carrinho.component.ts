@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Voo } from '../_models/voo.model';
+import { UserService } from '../_services/User.service';
 import { Hotel } from '../_models/hotel.model';
+import { MenuComponent } from '../menu/menu.component';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-carrinho',
@@ -17,11 +20,12 @@ export class CarrinhoComponent implements OnInit {
   totalHoteis = 0;
   total = 0;
 
-  constructor() { }
+  constructor(private userService: UserService, private alert: AlertifyService) { }
 
   ngOnInit() {
     this.getAllItems();
     this.calcularTotal();
+    this.getUser();
   }
 
   getAllItems() {
@@ -70,6 +74,12 @@ export class CarrinhoComponent implements OnInit {
     }
 
     this.total = this.totalVoos + this.totalHoteis;
+  }
+  getUser() {
+    this.userService.getUser().subscribe(data => {
+      //this.menu.ngOnInit();
+    }, error => {
+    });
   }
 
   finalizar() {

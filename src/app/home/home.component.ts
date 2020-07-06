@@ -47,7 +47,6 @@ export class HomeComponent implements OnInit {
 
   }
   async buscar(infos: any) {
-    console.log(infos);
     // hoteis
     await this.hotelService.getHoteis(infos.cidadeIdDestino, infos.dataCheckin,
       infos.adultos, infos.noites, infos.quartos).subscribe(data => {
@@ -64,7 +63,6 @@ export class HomeComponent implements OnInit {
         this.quotes = dados['Quotes'];
         this.companhias = dados['Carriers'];
         this.aeroportos = dados['Places'];
-        console.log(dados);
         this.montarVoos();
       });
   }

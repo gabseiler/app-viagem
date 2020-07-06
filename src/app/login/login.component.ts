@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
       this.alert.success('Login efetuado com sucesso.');
       this.router.navigate(['/carrinho']);
     }, error => {
-      console.log(error);
       if (error['non_field_errors']) {
         this.alert.error(error['non_field_errors'][0]);
       }
@@ -33,10 +32,7 @@ export class LoginComponent implements OnInit {
     });
 
     this.userService.getUser().subscribe(data => {
-      console.log('Get User');
-      console.log(data);
     }, error => {
-      console.log(error);
     });
   }
 

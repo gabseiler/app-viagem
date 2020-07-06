@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Voo } from '../_models/voo.model';
 import { Hotel } from '../_models/hotel.model';
 import { ReservaService } from '../_services/reserva.service';
+import { element } from 'protractor';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-finalizar-compra',
@@ -18,8 +20,9 @@ export class FinalizarCompraComponent implements OnInit {
   precoTotal: number;
 
   isBoleto = true;
+  naoFinalizou = false;
 
-  constructor(private reservaService: ReservaService) { }
+  constructor(private reservaService: ReservaService, private alert: AlertifyService) { }
 
   ngOnInit() {
     this.getAllItems();
@@ -54,12 +57,41 @@ export class FinalizarCompraComponent implements OnInit {
   }
 
   finalizar() {
+    let itensPacote = '';
+    if (this.voos.length > 0) {
+      itensPacote += 'Voo: ';
+      this.voos.forEach(element => {
+        itensPacote += element.cidadeDestino + ', Data: ' + element.dataIda + '; ';
+      });
+    }
+    if (this.hoteis.length > 0) {
+      itensPacote += 'Hotel: ';
+      this.hoteis.forEach(element => {
+        itensPacote += element.nome + '; ';
+      });
+    }
+
     const model = {
-      nomePacote : 'criar pacote',
-      precoTotal : 'RIOA-sky',
-      idCliente: localStorage.getItem('cliente')
+      user: localStorage.getItem('clienteId'),
+      hotel: 1,
+      voo: 1,
+      cpf: localStorage.getItem('clienteCpf'),
+      primeiro_nome: localStorage.getItem('clienteNome'),
+      itens_pacote: itensPacote,
+      preco_total: this.precoTotal,
+      email: localStorage.getItem('clienteEmail')
     };
+
+    this.naoFinalizou = true;
+
+    for (let a in localStorage) {
+      if (a.includes('item')) {
+        localStorage.removeItem(a);
+      }
+    }
+    localStorage.removeItem('precoTotal');
     this.reservaService.adicionarReserva(model).subscribe(data => {
+      this.alert.success("Compra realizada com sucesso!");
     }, error => {
     });
   }
