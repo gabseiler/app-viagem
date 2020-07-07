@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 export class ReservaService {
 
   baseUrl = 'https://api-app-viagem.herokuapp.com/reserva/';
-  smartBaseUrl = 'https://ep-dsid.herokuapp.com/usuarios/cpf/';
 
 
   constructor(private http: HttpClient) { }
@@ -29,9 +28,6 @@ export class ReservaService {
       headers: {'Authorization': 'Token ' + localStorage.getItem('token')}
    });
 
-  }
-  getReservasByClienteSmart(cpf: string) {
-    return this.http.get(this.smartBaseUrl + cpf + '/reservas');
   }
 
 }

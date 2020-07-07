@@ -34,12 +34,6 @@ export class ReservasComponent implements OnInit {
         });
       });
   }
-  getAllReservasSmart() {
-    this.reservaService.getReservasByClienteSmart(localStorage.getItem('clienteCpf'))
-      .subscribe(data => {
-        this.reservas = data;
-      });
-  }
 
   changeReserva(isGoFar: boolean) {
     this.gofar = isGoFar;

@@ -21,7 +21,6 @@ export class RegistrarComponent implements OnInit {
   register() {
     this.authService.register(this.model).subscribe(data => {
       this.alert.success('Registro efetuado com sucesso.');
-      localStorage.setItem('clienteCpf',this.model.cpf);
       this.router.navigate(['/carrinho']);
     }, error => {
       console.log(error);

@@ -1,57 +1,18 @@
 <div class="container" style="padding: 0px;">
   <div class="row">
-    <div class=" col-sm-3 sidebar1" *ngIf="!gofar">
-      <div class="left-navigation">
-        <br>
-        <ul class="list">
-          <li (click)="changeReserva(true)" class="menuitem">
-            <h5>Minhas Reservas GoFar</h5>
-          </li>
-          <li (click)="changeReserva(false)" class="menuitem">
-            <h5>Cliente Smart Traveler?</h5>
-          </li>
-        </ul>
-
-      </div>
-    </div>
-
-
-    <div *ngIf="gofar" class="col-sm-9">
-      <h1 class="card-title">Minhas Reservas GoFar:</h1>
-    </div>
-
-    <div *ngIf="!gofar" class="col-sm-9">
-      <h1 class="card-title">Minhas Reservas Smart Traveler:</h1>
-      <h4>Confira suas reservas no nosso parceiro!</h4>
-      <h6></h6>
+    <div class="col-sm-9">
+      <h1 class="card-title">Minhas Reservas:</h1>
     </div>
   </div>
   <br>
-  <div *ngIf="gofar">
-    <div class="row" *ngFor="let reserva of reservas">
-      <div class="col-sm-12">
-        <div class="card border-info">
-          <div class="card-body">
-            <p>Data de compra: {{reserva.data_compra | date:'dd/MM/yyyy'}}</p>
-            <h6>Conteúdo</h6>
-            <p>{{reserva.itens_pacote}}</p>
-            <h6>Preço total: R$ {{reserva.preco_total}}</h6>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="!gofar">
-    <div class="row" *ngFor="let reserva of reservas">
-      <div class="col-sm-9">
-        <div class="card border-info">
-          <div class="card-body">
-            <p>Data: {{reserva.data_compra | date:'dd/MM/yyyy'}}</p>
-            <h6>Conteúdo</h6>
-            <p>{{reserva.itensPacote}}</p>
-            <h6>Preço total: R$ {{reserva.preco_total}},00</h6>
-          </div>
+  <div class="row" *ngFor="let reserva of reservas">
+    <div class="col-sm-9">
+      <div class="card border-info">
+        <div class="card-body">
+          <p>Data: {{reserva.data_compra | date:'dd/MM/yyyy'}}</p>
+          <h6>Conteúdo</h6>
+          <p>{{reserva.itens_pacote}}</p>
+          <h6>Preço total: R$ {{reserva.preco_total}},00</h6>
         </div>
       </div>
     </div>

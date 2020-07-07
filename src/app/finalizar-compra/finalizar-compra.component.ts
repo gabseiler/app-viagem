@@ -70,12 +70,14 @@ export class FinalizarCompraComponent implements OnInit {
         itensPacote += element.nome + '; ';
       });
     }
+    let random = Math.floor(Math.random() * (999999 - 100000)) + localStorage.getItem('clienteId');
+    console.log(random);
 
     const model = {
       user: localStorage.getItem('clienteId'),
       hotel: 1,
       voo: 1,
-      cpf: localStorage.getItem('clienteCpf'),
+      cpf: random,
       primeiro_nome: localStorage.getItem('clienteNome'),
       itens_pacote: itensPacote,
       preco_total: this.precoTotal,
@@ -93,6 +95,7 @@ export class FinalizarCompraComponent implements OnInit {
     this.reservaService.adicionarReserva(model).subscribe(data => {
       this.alert.success("Compra realizada com sucesso!");
     }, error => {
+      console.log(error);
     });
   }
 
